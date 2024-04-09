@@ -784,6 +784,9 @@ require('lazy').setup({
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
+        disable = function(lang, bufnr) -- Disable in files with more than 5K
+          return vim.api.nvim_buf_line_count(bufnr) > 5000 or lang == 'json'
+        end,
       },
       indent = { enable = true, disable = { 'ruby' } },
     },
