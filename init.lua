@@ -98,8 +98,10 @@ vim.keymap.set('n', 'gY', 'ggVGy') -- If this doesn't work change + to * -- Copy
 vim.keymap.set('n', '<leader>e', '<Cmd>Neotree toggle<CR>')
 vim.keymap.set('n', '\\', '<Cmd>Neotree reveal <CR>')
 vim.keymap.set('n', '<leader>td', ':ToggleDiag<CR>') -- Toggle the diagnostics
+vim.keymap.set('n', '<leader>p', ':Glow<CR>') -- Glow to preview the markdown
 
 vim.keymap.set('n', '<leader>gs', ':Gitsigns toggle_linehl<CR>') -- Toggle the git diagnostics
+vim.keymap.set('n', '<leader>i', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which

@@ -4,7 +4,7 @@ return {
     'ThePrimeagen/harpoon',
     dependencies = { { 'nvim-lua/plenary.nvim' }, { 'nvim-telescope/telescope.nvim' } },
     keys = {
-      { '<leader>ah', ":lua require('harpoon.ui').toggle_quick_menu()<CR>", desc = 'Harpoon Menu' },
+      { '<leader>am', ":lua require('harpoon.ui').toggle_quick_menu()<CR>", desc = 'Harpoon Menu' },
       { '<leader>aa', ":lua require('harpoon.mark').add_file()<CR>", desc = 'add file as marked' },
       { '<leader>ad', ":lua require('harpoon.mark').rm_file()<CR>", desc = 'Remove file' },
       { '<leader>acl', ":lua require('harpoon.mark').clear_all()<CR>", desc = 'Clear shit' },
@@ -16,6 +16,23 @@ return {
       { '<leader>4', ":lua require('harpoon.ui').nav_file(4)<CR>", desc = '4th file' },
       { '<leader>5', ":lua require('harpoon.ui').nav_file(5)<CR>", desc = '5th file' },
     },
+  },
+  {
+    'ellisonleao/glow.nvim',
+    cmd = 'Glow',
+    config = function()
+      require('glow').setup {
+        -- glow_path = '', -- will be filled automatically with your glow bin in $PATH, if any
+        -- install_path = '~/.local/bin', -- default path for installing glow binary
+        border = 'shadow', -- floating window border config
+        style = 'dark', -- filled automatically with your current editor background, you can override using glow json style
+        pager = false,
+        -- width = 80,
+        -- height = 100,
+        width_ratio = 0.95, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
+        height_ratio = 0.95,
+      }
+    end,
   },
   { 'mbbill/undotree' },
   {
