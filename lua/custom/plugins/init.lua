@@ -1,5 +1,6 @@
 -- You can add your own plugins here or in other files in this directory!
 return {
+
   {
     'supermaven-inc/supermaven-nvim',
     config = function()
@@ -67,23 +68,17 @@ return {
   },
 
   {
-    'nvim-tree/nvim-tree.lua',
+    'nvim-neo-tree/neo-tree.nvim',
+    version = '*',
     dependencies = {
-      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'MunifTanjim/nui.nvim',
     },
     config = function()
-      require('nvim-tree').setup({
-        sort_by = "case_sensitive",
-        view = {
-          width = 30,
-        },
-        renderer = {
-          group_empty = true,
-        },
-        filters = {
-          dotfiles = true,
-        },
-      })
+      require('neo-tree').setup {
+        window = { position = 'right' },
+      }
     end,
   },
   {
