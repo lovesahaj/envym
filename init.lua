@@ -95,8 +95,8 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', 'gA', 'ggVG"+y') -- If this doesn't work change + to * -- Copy all to Clipboard
 vim.keymap.set('n', 'gY', 'ggVGy') -- If this doesn't work change + to * -- Copy all to Clipboard
 
-vim.keymap.set('n', '<leader>e', '<Cmd>Neotree toggle<CR>')
-vim.keymap.set('n', '\\', '<Cmd>Neotree reveal <CR>')
+vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { desc = 'Toggle NvimTree' })
+vim.keymap.set('n', '\\', ':NvimTreeFindFile<CR>', { desc = 'NvimTree Find File' })
 vim.keymap.set('n', '<leader>td', ':ToggleDiag<CR>') -- Toggle the diagnostics
 vim.keymap.set('n', '<leader>p', ':Glow<CR>') -- Glow to preview the markdown
 
@@ -800,6 +800,65 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'navarasu/onedark.nvim',
+    priority = 1000, -- make sure to load this before all the other start plugins
+    init = function()
+      -- Load the colorscheme here.
+      -- -- Lua
+      -- Lua
+      require('onedark').setup {
+        -- Main options --
+        style = 'cool', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+        transparent = true, -- Show/hide background
+        term_colors = true, -- Change terminal color as per the selected theme style
+        ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
+        cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
+
+        -- toggle theme style ---
+        toggle_style_key = '<leader>ts', -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
+        toggle_style_list = { 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' }, -- List of styles to toggle between
+
+        -- Change code style ---
+        -- Options are italic, bold, underline, none
+        -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
+        code_style = {
+          comments = 'italic',
+          keywords = 'bold',
+          functions = 'bold',
+          strings = 'none',
+          variables = 'bold',
+        },
+
+        -- Lualine options --
+        lualine = {
+          transparent = true, -- lualine center bar transparency
+        },
+
+        -- Custom Highlights --
+        colors = {
+          --   bright_orange = '#ff8800', -- define a new color
+          --   green = '#00ffaa', -- redefine an existing color
+          --   bright_purple = '#cc99cc',
+        },
+        highlights = {
+          --   ['@keyword'] = { fg = '$bright_orange' },
+          --   ['@string'] = { fg = '$bright_purple', fmt = 'bold' },
+          --   ['@function'] = { fg = 'yellow', fmt = 'italic' },
+          --   ['@function.builtin'] = { fg = 'bright_blue', fmt = 'bold' },
+          --   ['@comment'] = { fg = '$green', fmt = 'italic' },
+        },
+
+        -- Plugins Config --
+        diagnostics = {
+          darker = true, -- darker colors for diagnostic
+          undercurl = true, -- use undercurl instead of underline for diagnostics
+          background = true, -- use background color for virtual text
+        },
+      }
+      vim.cmd.colorscheme 'onedark'
+    end,
+  },
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is
@@ -811,10 +870,10 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'carbonfox'
+      -- vim.cmd.colorscheme 'carbonfox'
 
       -- You can configure highlights by doing something like
-      vim.cmd.hi 'Comment gui=none'
+      -- vim.cmd.hi 'Comment gui=none'
     end,
   },
 
@@ -833,7 +892,7 @@ require('lazy').setup({
       --
       -- Examples:
       --  - va)  - [V]isually select [A]round [)]paren
-      --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
+      --  - yinq - [Y]ank [I]nner [N]ext [Q]uote
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
 

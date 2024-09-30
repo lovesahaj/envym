@@ -5,11 +5,11 @@ return {
     'supermaven-inc/supermaven-nvim',
     config = function()
       require('supermaven-nvim').setup {
-        -- keymaps = {
-        --   accept_suggestion = '<Tab>',
-        --   clear_suggestion = '<C-]>',
-        --   accept_word = '<C-j>',
-        -- },
+        keymaps = {
+          accept_suggestion = '<C-a>',
+          clear_suggestion = '<C-]>',
+          accept_word = '<C-j>',
+        },
         -- ignore_filetypes = { cpp = true }, -- or { "cpp", }
         -- color = {
         --   suggestion_color = '#ffffff',
@@ -68,16 +68,22 @@ return {
   },
 
   {
-    'nvim-neo-tree/neo-tree.nvim',
-    version = '*',
+    'nvim-tree/nvim-tree.lua',
     dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
-      'MunifTanjim/nui.nvim',
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
     config = function()
-      require('neo-tree').setup {
-        window = { position = 'right' },
+      require('nvim-tree').setup {
+        sort_by = 'case_sensitive',
+        view = {
+          width = 30,
+        },
+        renderer = {
+          group_empty = true,
+        },
+        filters = {
+          dotfiles = true,
+        },
       }
     end,
   },
